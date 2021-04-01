@@ -1,4 +1,5 @@
 using InjectByRole.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,17 +20,30 @@ namespace InjectByRole
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<IOrdersRepository, OrdersRepository>();
+
+            services.AddTransient<IOrdersRepositoryFactory, OrdersRepositoryFactory>();
+            services.AddTransient<IDataSource, FakeDataSource>();
+            services.RegisterAllTypes<IOrdersRepository>(new[] { typeof(Startup).Assembly });
+
+            services.AddMediatR(typeof(Startup));
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseRouting();
 

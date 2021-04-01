@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InjectByRole.Entities;
 using InjectByRole.Repositories;
 using Mapster;
 

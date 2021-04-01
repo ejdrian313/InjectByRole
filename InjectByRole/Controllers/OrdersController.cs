@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using InjectByRole.Repositories;
-using Mapster;
-using System.Collections.Generic;
+using MediatR;
+using System.Threading.Tasks;
+using InjectByRole.Entities;
 
 namespace InjectByRole.Controllers
 {
@@ -9,19 +9,19 @@ namespace InjectByRole.Controllers
     [Route("[controller]")]
     public class OrdersController : ControllerBase
     {
-        private IOrdersRepository _ordersRepository;
+        private IMediator _mediator;
 
-        public OrdersController(IOrdersRepository ordersRepository)
+        public OrdersController(IMediator mediator)
         {
-            _ordersRepository = ordersRepository;
+            _mediator = mediator;
         }
 
-        [HttpGet]
-        public IActionResult GetAllOrders()
+        [HttpGet("{role}")]
+        public async Task<IActionResult> GetAllOrders(UserRole role)
         {
-            var orderDtos = _ordersRepository.GetOrdersAsync();
-            var orders = orderDtos.Adapt<List<OrderAdmin>>();
-            return Ok(orders);
+            var query = new GetAllOrdersQuery(role);
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
     }
 }
