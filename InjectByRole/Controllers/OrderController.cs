@@ -17,7 +17,6 @@ namespace InjectByRole.Controllers
         public IActionResult GetAllOrders()
         {
             var orderDtos = _ordersRepository.GetOrdersAsync();
-
             return Ok(orderDtos);
         }
     }

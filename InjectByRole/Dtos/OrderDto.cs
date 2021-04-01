@@ -9,5 +9,6 @@ namespace InjectByRole.Repositories
         public decimal Price { get; set; }
         public string AdminNote { get; set; }
         public DateTime Timestamp { get; set; }
+        public int ClientId { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using InjectByRole.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ namespace InjectByRole
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
