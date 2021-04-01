@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InjectByRole.Repositories;
+using Mapster;
+using System.Collections.Generic;
+
 namespace InjectByRole.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrderController : ControllerBase
+    public class OrdersController : ControllerBase
     {
         private IOrdersRepository _ordersRepository;
 
-        public OrderController(IOrdersRepository ordersRepository)
+        public OrdersController(IOrdersRepository ordersRepository)
         {
             _ordersRepository = ordersRepository;
         }
@@ -17,7 +20,8 @@ namespace InjectByRole.Controllers
         public IActionResult GetAllOrders()
         {
             var orderDtos = _ordersRepository.GetOrdersAsync();
-            return Ok(orderDtos);
+            var orders = orderDtos.Adapt<List<OrderAdmin>>();
+            return Ok(orders);
         }
     }
 }

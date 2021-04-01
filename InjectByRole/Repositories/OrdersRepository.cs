@@ -4,12 +4,12 @@ namespace InjectByRole.Repositories
 {
     public interface IOrdersRepository
     {
-        List<OrderDto> GetOrdersAsync();
+        ICollection<OrderDto> GetOrdersAsync();
     }
 
     public class OrdersRepository : IOrdersRepository
     {
-        public List<OrderDto> GetOrdersAsync()
+        public ICollection<OrderDto> GetOrdersAsync()
         {
             return new List<OrderDto> {
                 new OrderDto {
