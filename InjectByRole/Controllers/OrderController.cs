@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InjectByRole.Repositories;
-
 namespace InjectByRole.Controllers
 {
     [ApiController]
@@ -17,9 +16,9 @@ namespace InjectByRole.Controllers
         [HttpGet]
         public IActionResult GetAllOrders()
         {
-            _ordersRepository.GetOrdersAsync();
+            var orderDtos = _ordersRepository.GetOrdersAsync();
 
-            return Ok();
+            return Ok(orderDtos);
         }
     }
 }
