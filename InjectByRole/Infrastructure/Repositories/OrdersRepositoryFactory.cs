@@ -1,15 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using InjectByRole.Entities;
 
 namespace InjectByRole.Repositories
 {
-
-    public interface IOrdersRepositoryFactory
-    {
-        IOrdersRepository ProvideOrdersRepository(UserRole userRole);
-    }
-
     public class OrdersRepositoryFactory : IOrdersRepositoryFactory
     {
         private readonly IEnumerable<IOrdersRepository> repositories;

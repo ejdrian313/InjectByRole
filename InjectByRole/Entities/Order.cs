@@ -7,7 +7,6 @@ namespace InjectByRole.Entities
         public string OrderedName { get; set; }
         public decimal Price { get; set; }
         public DateTime Timestamp { get; set; }
-
     }
 
     public class OrderAdmin : Order

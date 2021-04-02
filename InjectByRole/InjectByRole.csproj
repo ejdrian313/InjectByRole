@@ -6,14 +6,13 @@
 
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Queries\" />
-    <Folder Include="Commands\" />
-    <Folder Include="Dtos\" />
+    <Folder Include="Infrastructure\Dtos\" />
     <Folder Include="Maping\" />
     <Folder Include="Entities\" />
-    <Folder Include="Handlers\" />
     <Folder Include="Infrastructure\" />
+    <Folder Include="Application\" />
+    <Folder Include="Application\Commands\" />
+    <Folder Include="Infrastructure\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InjectByRole.Entities;
+using Mapster;
 
 namespace InjectByRole.Repositories
 {
@@ -13,9 +15,12 @@ namespace InjectByRole.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task<IList<OrderDto>> GetOrdersAsync()
+        public async Task<IList<OrderAdmin>> GetOrdersAsync(int clientId)
         {
-            return await dataSource.GetOrdersAsync();
+            var orderDtos = await dataSource.GetOrdersAsync();
+            var mapped = orderDtos.ToList()
+                .Adapt<List<OrderAdmin>>();
+            return mapped;
         }
 
         public bool UserIsInRole(UserRole userRole)

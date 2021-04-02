@@ -16,10 +16,10 @@ namespace InjectByRole.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{role}")]
-        public async Task<IActionResult> GetAllOrders(UserRole role)
+        [HttpGet]
+        public async Task<IActionResult> GetAllOrders(UserRole role, int clientId)
         {
-            var query = new GetAllOrdersQuery(role);
+            var query = new GetAllOrdersQuery(role, clientId);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

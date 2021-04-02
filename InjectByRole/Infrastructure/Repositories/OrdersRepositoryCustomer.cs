@@ -15,14 +15,14 @@ namespace InjectByRole.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task<IList<OrderDto>> GetOrdersAsync()
+        public async Task<IList<OrderAdmin>> GetOrdersAsync(int clientId)
         {
             var orderDtos = await dataSource.GetOrdersAsync();
             var filtered = orderDtos.ToList()
-                .Where(o => o.ClientId == 222)
+                .Where(o => o.ClientId == clientId)
                 .ToList()
                 .Adapt<List<OrderCustomer>>()
-                .Adapt<List<OrderDto>>();
+                .Adapt<List<OrderAdmin>>();
             return filtered;
         }
 

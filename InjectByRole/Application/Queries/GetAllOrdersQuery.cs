@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using InjectByRole.Entities;
-using InjectByRole.Repositories;
 using MediatR;
 
 namespace InjectByRole.Controllers
 {
-    public class GetAllOrdersQuery : IRequest<List<OrderDto>>
+    public class GetAllOrdersQuery : IRequest<List<OrderAdmin>>
     {
         public UserRole userRole;
+        public int userId;
 
-        public GetAllOrdersQuery(UserRole userRole)
+        public GetAllOrdersQuery(UserRole userRole, int userId)
         {
             this.userRole = userRole;
+            this.userId = userId;
         }
     }
 }

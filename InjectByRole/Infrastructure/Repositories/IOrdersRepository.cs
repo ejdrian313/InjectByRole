@@ -6,7 +6,7 @@ namespace InjectByRole.Repositories
 {
     public interface IOrdersRepository
     {
-        Task<IList<OrderDto>> GetOrdersAsync();
+        Task<IList<OrderAdmin>> GetOrdersAsync(int userId);
         bool UserIsInRole(UserRole userRole);
     }
 }
