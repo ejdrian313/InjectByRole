@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using InjectByRole.Controllers;
 using InjectByRole.Entities;
 using InjectByRole.Repositories;
+using LanguageExt;
+using LanguageExt.SomeHelp;
 using MediatR;
 
 namespace InjectByRole.Handlers
 {
-    public class GetAllOrdersHandler : IRequestHandler<GetAllOrdersQuery, List<OrderAdmin>>
+
+    public class GetAllOrdersHandler : IRequestHandler<GetAllOrdersQuery, Option<List<OrderAdmin>>>
     {
         private readonly IOrdersRepositoryFactory _ordersRepositoryFactory;
 
@@ -18,11 +21,14 @@ namespace InjectByRole.Handlers
             _ordersRepositoryFactory = ordersRepositoryFactory;
         }
 
-        public async Task<List<OrderAdmin>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<Option<List<OrderAdmin>>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
             var repository = _ordersRepositoryFactory.ProvideOrdersRepository(request.userRole);
             var orders = await repository.GetOrdersAsync(request.userId);
-            return orders.ToList();
+            if (orders.IsNullOrEmpty())
+                return Option<List<OrderAdmin>>.None;
+
+            return orders.ToList().ToSome();
         }
     }
 }

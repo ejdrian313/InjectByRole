@@ -15,8 +15,7 @@ namespace InjectByRole.Repositories
 
         public IOrdersRepository ProvideOrdersRepository(UserRole userRole)
         {
-            var repository = repositories.First(r => r.UserIsInRole(userRole));
-            return repository;
+            return repositories.First(r => r.UserIsInRole(userRole));
         }
     }
 }

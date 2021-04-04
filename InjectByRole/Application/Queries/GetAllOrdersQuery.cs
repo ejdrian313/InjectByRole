@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using InjectByRole.Entities;
+using LanguageExt;
 using MediatR;
 
 namespace InjectByRole.Controllers
 {
-    public class GetAllOrdersQuery : IRequest<List<OrderAdmin>>
+    public class GetAllOrdersQuery : IRequest<Option<List<OrderAdmin>>>
     {
         public UserRole userRole;
         public int userId;

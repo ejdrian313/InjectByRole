@@ -21,7 +21,7 @@ namespace InjectByRole.Controllers
         {
             var query = new GetAllOrdersQuery(role, clientId);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            return result.Match<IActionResult>(Ok, NotFound);
         }
     }
 }
